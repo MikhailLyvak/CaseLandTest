@@ -55,7 +55,7 @@ export default function Home() {
 
         <div className="hero-card">
           <Image
-            src="/images/before-after.png"
+            src="/images/main-h-image.png"
             alt="Преміальний помаранчевий чохол на iPhone"
             fill
             priority
