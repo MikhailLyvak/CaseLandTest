@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackLeadSubmit } from "../lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -38,6 +39,7 @@ export function LeadForm() {
 
       setStatus("success");
       setMessage("Заявку відправлено. Скоро напишемо тобі в Telegram.");
+      trackLeadSubmit();
       form.reset();
     } catch {
       setStatus("error");
@@ -61,8 +63,8 @@ export function LeadForm() {
         Модель iPhone
         <select name="model" defaultValue="iPhone 15 Pro" required>
           <option>iPhone 15 Pro</option>
-          <option disabled>iPhone 15</option>
-          <option disabled>iPhone 15 Pro Max</option>
+          <option>iPhone 15</option>
+          <option>iPhone 15 Pro Max</option>
         </select>
       </label>
 

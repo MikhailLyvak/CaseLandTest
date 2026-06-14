@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { LeadForm } from "../components/LeadForm";
+import { TrackedLink } from "../components/TrackedLink";
 
 const productBullets = [
   {
@@ -44,12 +45,16 @@ export default function Home() {
           <h1>Люди думають, що це iPhone 17</h1>
           <p className="hero-text">Насправді це твій iPhone 15 Pro.</p>
           <div className="hero-actions">
-            <a className="button" href="#order">
+            <TrackedLink className="button" href="#order" ctaLocation="hero_order">
               Замовити
-            </a>
-            <a className="ghost-link" href="#details">
+            </TrackedLink>
+            <TrackedLink
+              className="ghost-link"
+              href="#details"
+              ctaLocation="hero_details"
+            >
               Подивитись деталі
-            </a>
+            </TrackedLink>
           </div>
         </div>
 
@@ -130,9 +135,9 @@ export default function Home() {
         <LeadForm />
       </section>
 
-      <a className="sticky-cta" href="#order">
+      <TrackedLink className="sticky-cta" href="#order" ctaLocation="sticky_order">
         Замовити в Telegram
-      </a>
+      </TrackedLink>
     </main>
   );
 }
