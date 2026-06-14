@@ -67,7 +67,6 @@ export function LeadForm() {
           <option>iPhone 15 Pro Max</option>
         </select>
       </label>
-// asdasd
       <label>
         Коментар
         <textarea
