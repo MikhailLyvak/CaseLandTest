@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
-
-type LeadPayload = {
-  name?: string;
-  contact?: string;
-  model?: string;
-  comment?: string;
-};
-
-function clean(value: unknown) {
-  return String(value ?? "").trim().slice(0, 500);
-}
+import {
+  formatLeadMessage,
+  parseLeadPayload,
+  type LeadPayload,
+} from "@/lib/lead";
 
 export async function POST(request: Request) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -30,28 +24,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const name = clean(payload.name);
-  const contact = clean(payload.contact);
-  const model = clean(payload.model);
-  const comment = clean(payload.comment);
+  const lead = parseLeadPayload(payload);
 
-  if (!name || !contact || !model) {
+  if (!lead) {
     return NextResponse.json(
       { error: "Name, contact, and model are required" },
       { status: 400 },
     );
   }
-
-  const text = [
-    "Нова заявка на чохол",
-    "",
-    `Імʼя: ${name}`,
-    `Контакт: ${contact}`,
-    `Модель: ${model}`,
-    comment ? `Коментар: ${comment}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
 
   const telegramResponse = await fetch(
     `https://api.telegram.org/bot${token}/sendMessage`,
@@ -62,7 +42,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         chat_id: chatId,
-        text,
+        text: formatLeadMessage(lead),
       }),
     },
   );

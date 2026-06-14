@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { trackLeadSubmit } from "../lib/analytics";
+import { iphoneModels } from "@/config/content";
+import { trackLeadSubmit } from "@/lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -61,12 +62,13 @@ export function LeadForm() {
 
       <label>
         Модель iPhone
-        <select name="model" defaultValue="iPhone 15 Pro" required>
-          <option>iPhone 15 Pro</option>
-          <option>iPhone 15</option>
-          <option>iPhone 15 Pro Max</option>
+        <select name="model" defaultValue={iphoneModels[0]} required>
+          {iphoneModels.map((model) => (
+            <option key={model}>{model}</option>
+          ))}
         </select>
       </label>
+
       <label>
         Коментар
         <textarea
@@ -80,7 +82,11 @@ export function LeadForm() {
         {status === "loading" ? "Відправляємо..." : "Замовити в Telegram"}
       </button>
 
-      {message ? <p className={`form-status ${status}`}>{message}</p> : null}
+      {message ? (
+        <p className={`form-status ${status}`} aria-live="polite">
+          {message}
+        </p>
+      ) : null}
     </form>
   );
 }

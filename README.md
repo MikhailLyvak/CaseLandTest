@@ -48,13 +48,35 @@ On Vercel, add the same variable in Project Settings → Environment Variables (
 
 Verify in GA4 → Reports → Realtime after opening the site locally or in production.
 
+## SEO
+
+The site includes technical and content SEO out of the box:
+
+- `robots.txt` and `sitemap.xml` (App Router routes)
+- Canonical URL, Open Graph, Twitter cards
+- JSON-LD structured data (`Product`, `Offer`, `FAQPage`, `WebSite`)
+- Ukrainian metadata and FAQ section
+- Web manifest and favicon
+
+Set your production URL in `.env.local`:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://case-land-test.web.app
+```
+
+After deploy:
+
+1. Open [Google Search Console](https://search.google.com/search-console) and add the property.
+2. Submit `https://your-domain.com/sitemap.xml`.
+3. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) if needed.
+
 ## Deploy
 
 Use Vercel Free for this project because the Telegram bot token must stay on the server.
 
 1. Push the project to GitHub.
 2. Import the repository in Vercel.
-3. Add `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, and `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Vercel Project Settings → Environment Variables.
+3. Add `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `NEXT_PUBLIC_GA_MEASUREMENT_ID`, and `NEXT_PUBLIC_SITE_URL` in Vercel Project Settings → Environment Variables.
 4. Deploy.
 
 GitHub Pages is not recommended for the final version because it cannot securely store the Telegram bot token for the contact form.

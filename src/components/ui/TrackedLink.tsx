@@ -1,7 +1,7 @@
 "use client";
 
-import type { CtaLocation } from "../lib/analytics";
-import { trackCtaClick } from "../lib/analytics";
+import type { CtaLocation } from "@/lib/analytics";
+import { trackCtaClick } from "@/lib/analytics";
 
 type TrackedLinkProps = {
   href: string;
