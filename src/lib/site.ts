@@ -1,6 +1,13 @@
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://case-land-test.vercel.app";
+function normalizeSiteUrl(url: string | undefined) {
+  const trimmed = url?.trim();
+  if (!trimmed) {
+    return "https://case-land-test.vercel.app";
+  }
 
+  return trimmed.replace(/\/$/, "");
+}
+
+export const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 export const siteName = "CaseLand";
 
 export const product = {
